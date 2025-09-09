@@ -1,30 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import ShimmerEffect from './ShimmerEffect';
+import useFetch from '../hooks/useFetch';
 function Product() {
-    const [data, setData] = useState([])
-    async function products() {
-        try {
-            let response = await axios.get(`https://api.escuelajs.co/api/v1/products`);
-            let finalres = response.data;
-            setData(finalres);
-            console.log(finalres);
-        } catch (error) {
-            console.log("error", error);
-        }
-    }
-    useEffect(() => {
-        products();
-    }, [])
+    const { data, error, loading } = useFetch(`https://api.escuelajs.co/api/v1/products`)
 
-    if (data.length === 0) {
+    if (loading) {
         return <ShimmerEffect />
+    }
+    if (error) {
+        return <p className='text-red-x; capitalize text-center'>{error.message}</p>
     }
     return (
         <>
             <h1 className='text-center font-light text-4xl mt-5 capitalize text-blue-700'>Our Products</h1>
             <div className='container mx-auto px-6 py-5 lg-px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                 {data.map((val, index) => {
+                    
                     return (
                         <div key={index} className='mx-w-md w-full p-3 rounded-2xl shadow-md'>
                             <div className='w-full h-[20rem]'>
