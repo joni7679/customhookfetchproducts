@@ -8,7 +8,7 @@ const ShimmerEffect = () => {
                 {arry.map((_, index) => {
                     return (
                         <div key={index} className='mx-w-md w-full p-3 rounded-2xl shadow-md animate-pulse bg-gray-200'>
-                            <div className='w-[20rem] h-[20rem] animate-pulse bg-gray-200'>
+                            <div className='w-full h-[20rem] animate-pulse bg-gray-200'>
                             </div>
                             <div className='product-info'>
                             </div>
@@ -17,7 +17,6 @@ const ShimmerEffect = () => {
                 })}
             </div>
         </>
-
     )
 }
 
